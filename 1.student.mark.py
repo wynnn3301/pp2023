@@ -22,15 +22,16 @@ def input_course (course):
         course.append(small_list_course)
     
 
-def pick_cs_and_enter_mark (course, stu_list):  
-    pick_cs = input('nhap khoa hoc muon chon: ')
-    for small_list_course in course:                
-            if pick_cs == small_list_course[0]:
-                mark = []
-                for i in range(len(stu_list)):
-                    point = int(input('Nhap point cua hs: '))
-                    mark.append(point)
-                small_list_course.append(mark)
+def pick_cs_and_enter_mark (course, stu_list):
+    for i in range(len(course)):  
+        pick_cs = input('nhap khoa hoc muon chon: ')
+        for small_list_course in course:                
+                if pick_cs == small_list_course[0]:
+                    mark = []
+                    for i in range(len(stu_list)):
+                        point = int(input('Nhap diem cua hs vao ' + small_list_course[1] + ':'))
+                        mark.append(point)
+                    small_list_course.append(mark)
 
 
 def print_stu (stu_list): 
@@ -53,16 +54,35 @@ def print_point(course):
     enter_cs_id = input('Nhap id khoa hoc can xem diem: ')
     for small_list_course in course:
         if small_list_course[0] == enter_cs_id:
-            print('diem trong khoa hoc', small_list_course[2])
+            print('diem trong khoa hoc ' + small_list_course[1] + ' cua hoc sinh la: ', small_list_course[2])
         
 
 
 # Main code
 stu_list = []
 course = []
-input_stu(stu_list)
-input_course(course)
-pick_cs_and_enter_mark(course,stu_list)
-print_stu(stu_list)
-print_cs(course)
-print_point(course)
+while True:
+    print('''1. Nhap danh sach hoc sinh
+2. Nhap danh sach khoa hoc
+3. Chon khoa hoc va nhap diem
+4. In danh sach hoc sinh
+5. In danh sach khoa hoc
+6. In diem cua hoc sinh
+7. Thoat''')   
+    choice = int(input('Nhap lua chon: '))
+    if choice == 1:
+        input_stu(stu_list)
+    elif choice == 2:
+        input_course(course)
+    elif choice == 3:
+        pick_cs_and_enter_mark(course,stu_list)
+    elif choice == 4:
+        print_stu(stu_list)
+    elif choice == 5:
+        print_cs(course)
+    elif choice == 6:
+        print_point(course)
+    elif choice == 7:
+        break
+    else:
+        print('Nhap lai lua chon: ')
